@@ -5,6 +5,7 @@ public class Methode2 extends Methode{
 	private int Imin, Imax, Jmin, Jmax;
 	private int[][] next;
 	private boolean stepParity = true;
+	private double P=0.6; //probabilite qu'un grain double tombe
 	
 	public Methode2(int x, int y) {
 		super(x, y);
@@ -20,10 +21,11 @@ public class Methode2 extends Methode{
 	}
 
 	public void init() {
+		Imax=X-1; Jmax=Y-1;
 		if(stepParity) {
-			Imin=0; Imax=X-1; Jmin=0; Jmax=Y-1;
+			Imin=0; Jmin=0;
 		}else {
-			Imin=1; Imax=X-1; Jmin=1; Jmax=Y-1;
+			Imin=1; Jmin=1;
 		}
 	}
 	
@@ -32,7 +34,7 @@ public class Methode2 extends Methode{
 		
 		if(getState(x,y)==1 && getState(x+1,y)==1 && getState(x,y+1)==0 && getState(x+1,y+1)==0) {
 			r=Math.random();
-			if(r<0.5) {
+			if(r<P) {
 				next[x][y] = 0;
 				next[x+1][y] = 0;
 				next[x][y+1] = 1;
@@ -81,17 +83,19 @@ public class Methode2 extends Methode{
 				next[x][y+1] = 1;
 				next[x+1][y+1] = 1;
 				
-			}else if(getState(x,y)==1 && getState(x+1,y)==1 && getState(x,y+1)==1 && getState(x+1,y+1)==0) {
-				next[x][y] = 1;
+			}
+			//regles additionnelles
+			else if( getState(x+1,y)==1 && getState(x+1,y+1)==0) {
+				next[x][y] = getState(x,y);
 				next[x+1][y] = 0;
-				next[x][y+1] = 1;
+				next[x][y+1] = getState(x,y+1);
 				next[x+1][y+1] = 1;
 
-			}else if(getState(x,y)==1 && getState(x+1,y)==1 && getState(x,y+1)==0 && getState(x+1,y+1)==1) {
+			}else if(getState(x,y)==1 && getState(x,y+1)==0 ) {
 				next[x][y] = 0;
-				next[x+1][y] = 1;
+				next[x+1][y] = getState(x+1,y);
 				next[x][y+1] = 1;
-				next[x+1][y+1] = 1;
+				next[x+1][y+1] = getState(x+1,y+1);
 				
 			}else {
 				next[x][y] = getState(x, y);

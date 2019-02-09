@@ -28,7 +28,7 @@ public class Modele extends Observable {
 		      protected Object doInBackground() throws Exception {
 		        while(play) {
 		        	methode.nextConfig();
-		        	Thread.sleep(100);
+		        	Thread.sleep(60);
 		        	miseAJour();
 		        }
 				return null;

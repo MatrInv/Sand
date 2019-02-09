@@ -11,22 +11,15 @@ public class Methode1 extends Methode {
 
 	public void nextConfig() {
 		int grilleNext[][] = new int[X][Y];
+		//grilleNext = clone(grille, grilleNext);
 		for (int x = 1; x < X - 1; x++) {
 			for (int y = 1; y < Y - 1; y++) {
 				grilleNext[x][y] = nextState(x, y);
 			}
 		}
 		
-		
 		grille = grilleNext;
-		
-		for (int x = 0; x < X; x++) {
-			for (int y = 0; y < Y; y++) {
-				if (y >= Y-1 || y == 0 || x == 0 || x >= X-1) {
-					setState(x, y, 2);
-				}
-			}
-		}
+	
 	}
 
 	public int nextState(int x, int y) {

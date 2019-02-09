@@ -40,17 +40,24 @@ public class Modele extends Observable {
 		    sw.execute();
 	}
 
-	public Color ajoutGrain(int x, int y) {
-		if (methode.getState(x, y) == 0) {
-			methode.setState(x, y, 1);
-			return Color.yellow;
-		} else if (methode.getState(x, y) == 1) {
-			methode.setState(x, y, 2);
+	public Color ajoutGrain(int x, int y, int type) {
+		
+		if(x == getX()-1 || y == getY()-1 || x ==0 || y == 0 || type == 0) {
+			setState(x, y, 2);
 			return Color.black;
-		} else {
+		}
+		
+		if ((getState(x, y) == 1 && type == 1) || (getState(x, y) == 2 && type == 2)) {
 			methode.setState(x, y, 0);
 			return Color.white;
+		} else if (type == 1) {
+			methode.setState(x, y, 1);
+			return Color.yellow;
+		} else {
+			methode.setState(x, y, 2);
+			return Color.black;
 		}
+		
 	}
 
 	public int getX() {

@@ -11,7 +11,7 @@ public class Methode1 extends Methode {
 
 	public void nextConfig() {
 		int grilleNext[][] = new int[X][Y];
-		//grilleNext = clone(grille, grilleNext);
+		grilleNext = clone(grille, grilleNext);
 		for (int x = 1; x < X - 1; x++) {
 			for (int y = 1; y < Y - 1; y++) {
 				grilleNext[x][y] = nextState(x, y);
@@ -52,6 +52,11 @@ public class Methode1 extends Methode {
 			}
 		}
 		return getState(x, y);
+	}
+
+	@Override
+	public String getName() {
+		return "Notre méthode";
 	}
 
 }

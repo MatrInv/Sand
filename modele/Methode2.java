@@ -16,7 +16,6 @@ public class Methode2 extends Methode{
 	public void nextConfig() {
 		globalTransition();
 		grille = next;
-		next = new int[X][Y];
 		stepParity = !stepParity;
 	}
 
@@ -120,6 +119,11 @@ public class Methode2 extends Methode{
 			
 			//t++;
 		//}while(t<tMax);
+	}
+
+	@Override
+	public String getName() {
+		return "Méthode Matyka";
 	}
 	
 	

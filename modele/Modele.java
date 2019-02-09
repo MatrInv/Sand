@@ -4,23 +4,38 @@ import java.awt.Color;
 import java.util.Observable;
 import java.util.Observer;
 
-import javax.swing.SwingUtilities;
 import javax.swing.SwingWorker;
 
 public class Modele extends Observable {
 	private Methode methode;
 	private boolean play;
 
-	private int couleurActu;
-
 	public Modele(int x, int y) {
 		methode = new Methode2(x, y);
 		play = false;
-		couleurActu = 1;
+	}
+	
+	public void setMethod() {
+		if (methode.getName().equals("M�thode Matyka")) {
+			methode = new Methode1(getX(), getY());
+		}else {
+			methode = new Methode2(getX(), getY());
+		}
+		reset();
+	}
+	
+	public String getMethodName() {
+		return methode.getName();
 	}
 	
 	public boolean getPlay() {
 		return play;
+	}
+	
+	public void reset() {
+		play = false;
+		methode.reset();
+		miseAJour();
 	}
 
 	public void playNext() {
@@ -28,7 +43,9 @@ public class Modele extends Observable {
 		      protected Object doInBackground() throws Exception {
 		        while(play) {
 		        	methode.nextConfig();
-		        	Thread.sleep(40);
+
+		        	Thread.sleep(30);
+
 		        	miseAJour();
 		        }
 				return null;

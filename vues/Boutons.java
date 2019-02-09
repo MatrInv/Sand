@@ -3,6 +3,7 @@ package vues;
 import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Observable;
@@ -10,22 +11,25 @@ import java.util.Observer;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import modele.Methode1;
 import modele.Modele;
 
 public class Boutons extends JPanel implements Observer{
 	
 	private Modele m;
 	private JButton play;
+	private JButton reset;
+	private JButton method;
+	private JLabel methodName;
 
 	public Boutons(Modele mod) {
 		super();
 		
 		m = mod;
 		m.addObserver(this);
-
-		this.setBorder(BorderFactory.createLineBorder(Color.BLACK, 12));
 
 		play = new JButton("Play");
 		
@@ -37,7 +41,32 @@ public class Boutons extends JPanel implements Observer{
 				m.playNext();
 			}
 		});
+		
+		reset = new JButton("Reset");
+		reset.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				m.reset();
+			}
+		});
+		
+		method = new JButton("Change Method");
+		method.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				m.setMethod();
+			}
+		});
+		
+		methodName = new JLabel(m.getMethodName());
+		
+		this.add(reset);
 		this.add(play);
+		this.add(method);
+		this.add(methodName);
+		this.setLayout(new GridLayout(4,1));
 	}
 
 	@Override
@@ -47,6 +76,8 @@ public class Boutons extends JPanel implements Observer{
 		}else {
 			play.setText("Play");
 		}
+		
+		methodName.setText(m.getMethodName());
 	}
 
 }

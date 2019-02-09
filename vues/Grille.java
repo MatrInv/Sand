@@ -30,6 +30,8 @@ public class Grille extends JPanel implements Observer {
 	private Color couleurs[] = { Color.WHITE, Color.yellow, Color.BLACK };
 
 	private boolean pressed;
+	
+	private int buttonDown;
 
 	/**
 	 * 
@@ -78,9 +80,9 @@ public class Grille extends JPanel implements Observer {
 					}
 
 					@Override
-					public void mousePressed(MouseEvent arg0) {
+					public void mousePressed(MouseEvent e) {
 						pressed = !pressed;
-
+						buttonDown = e.getButton();
 					}
 
 					@Override
@@ -113,7 +115,7 @@ public class Grille extends JPanel implements Observer {
 					}
 
 					public int detectClic(MouseEvent e) {
-						int buttonDown = e.getButton();
+
 						if (buttonDown == MouseEvent.BUTTON1) { //bouton gauche
 							return 1;
 						} else if(buttonDown == MouseEvent.BUTTON2) {//bouton milieu
@@ -121,7 +123,7 @@ public class Grille extends JPanel implements Observer {
 						} else if (buttonDown == MouseEvent.BUTTON3) { //bouton droit
 							return 2;
 						}
-						return 1;
+						return 0;
 					}
 				});
 

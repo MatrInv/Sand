@@ -42,12 +42,12 @@ public class Modele extends Observable {
 
 	public Color ajoutGrain(int x, int y, int type) {
 		
-		if(x == getX()-1 || y == getY()-1 || x ==0 || y == 0 || type == 0) {
+		if(x == getX()-1 || y == getY()-1 || x ==0 || y == 0) {
 			setState(x, y, 2);
 			return Color.black;
 		}
 		
-		if ((getState(x, y) == 1 && type == 1) || (getState(x, y) == 2 && type == 2)) {
+		if (type == 0) {
 			methode.setState(x, y, 0);
 			return Color.white;
 		} else if (type == 1) {

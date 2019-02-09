@@ -28,9 +28,8 @@ public class Grille extends JPanel implements Observer {
 	private GridBagConstraints grid;
 
 	private Color couleurs[] = { Color.WHITE, Color.yellow, Color.BLACK };
-	
-	private boolean pressed;
 
+	private boolean pressed;
 
 	/**
 	 * 
@@ -39,7 +38,7 @@ public class Grille extends JPanel implements Observer {
 
 	public Grille(Modele mod) {
 		super();
-		
+
 		pressed = false;
 
 		m = mod;
@@ -64,7 +63,7 @@ public class Grille extends JPanel implements Observer {
 			for (int y = 0; y < m.getY(); y++) {
 				grid.gridy = y;
 				JButton c = new JButton();
-				if (y >= m.getY()-1 || y == 0 || x == 0 || x >= m.getX()-1) {
+				if (y >= m.getY() - 1 || y == 0 || x == 0 || x >= m.getX() - 1) {
 					c.setBackground(Color.black);
 					m.setState(x, y, 2);
 				} else
@@ -92,44 +91,40 @@ public class Grille extends JPanel implements Observer {
 
 					@Override
 					public void mouseEntered(MouseEvent e) {
-						if (pressed) {
-							for (int x = 0; x < m.getX(); x++) {
-								for (int y = 0; y < m.getY(); y++) {
-									if ((JButton) e.getSource() == grille[x][y]) {
-										Color color = m.ajoutGrain(x, y);
-										JButton b = (JButton) e.getSource();
-										b.setBackground(color);
-									}
+						if (pressed)
+							actionButton(e);
+					}
+
+					@Override
+					public void mouseClicked(MouseEvent e) {
+						actionButton(e);
+					}
+
+					public void actionButton(MouseEvent e) {
+						for (int x = 0; x < m.getX(); x++) {
+							for (int y = 0; y < m.getY(); y++) {
+								if ((JButton) e.getSource() == grille[x][y]) {
+									Color color = m.ajoutGrain(x, y, detectClic(e));
+									JButton b = (JButton) e.getSource();
+									b.setBackground(color);
 								}
 							}
 						}
 					}
 
-					@Override
-					public void mouseClicked(MouseEvent e) {
-							for (int x = 0; x < m.getX(); x++) {
-								for (int y = 0; y < m.getY(); y++) {
-									if ((JButton) e.getSource() == grille[x][y]) {
-										Color color = m.ajoutGrain(x, y);
-										JButton b = (JButton) e.getSource();
-										b.setBackground(color);
-									}
-								}
-							}
-						
+					public int detectClic(MouseEvent e) {
+						int buttonDown = e.getButton();
+						if (buttonDown == MouseEvent.BUTTON1) { //bouton gauche
+							return 1;
+						} else if(buttonDown == MouseEvent.BUTTON2) {//bouton milieu
+							return 0;
+						} else if (buttonDown == MouseEvent.BUTTON3) { //bouton droit
+							return 2;
+						}
+						return 1;
 					}
 				});
-				/*
-				 * c.addActionListener(new ActionListener() {
-				 * 
-				 * @Override public void actionPerformed(ActionEvent e) { for (int x = 0; x <
-				 * m.getX(); x++) { for (int y = 0; y < m.getY(); y++) { if((JButton)
-				 * e.getSource() == grille[x][y]) { Color color = m.ajoutGrain(x,y); JButton b =
-				 * (JButton) e.getSource(); b.setBackground(color); } } }
-				 * 
-				 * 
-				 * } });
-				 */
+
 				grille[x][y] = c;
 				this.add(c, grid);
 			}

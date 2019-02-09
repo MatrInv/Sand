@@ -11,16 +11,19 @@ public class Modele extends Observable {
 	private Methode methode;
 	private boolean play;
 
-	private int couleurActu;
-
 	public Modele(int x, int y) {
 		methode = new Methode2(x, y);
 		play = false;
-		couleurActu = 1;
 	}
 	
 	public boolean getPlay() {
 		return play;
+	}
+	
+	public void reset() {
+		play = false;
+		methode.reset();
+		miseAJour();
 	}
 
 	public void playNext() {
@@ -28,7 +31,7 @@ public class Modele extends Observable {
 		      protected Object doInBackground() throws Exception {
 		        while(play) {
 		        	methode.nextConfig();
-		        	Thread.sleep(60);
+		        	Thread.sleep(30);
 		        	miseAJour();
 		        }
 				return null;

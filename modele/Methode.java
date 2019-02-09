@@ -45,4 +45,17 @@ public abstract class Methode {
 		}
 		return tab2;
 	}
+	
+	public void reset() {
+		for (int x = 0; x < X; x++) {
+			for (int y = 0; y < Y; y++) {
+				if(x == X-1 || x == 0 || y == Y-1 || y == 0) {
+					grille[x][y] = 2;
+				}
+				else {
+					grille[x][y] = 0;
+				}
+			}
+		}
+	}
 }

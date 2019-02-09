@@ -3,6 +3,7 @@ package vues;
 import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Observable;
@@ -18,14 +19,13 @@ public class Boutons extends JPanel implements Observer{
 	
 	private Modele m;
 	private JButton play;
+	private JButton reset;
 
 	public Boutons(Modele mod) {
 		super();
 		
 		m = mod;
 		m.addObserver(this);
-
-		this.setBorder(BorderFactory.createLineBorder(Color.BLACK, 12));
 
 		play = new JButton("Play");
 		
@@ -37,7 +37,18 @@ public class Boutons extends JPanel implements Observer{
 				m.playNext();
 			}
 		});
+		
+		reset = new JButton("Reset");
+		reset.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				m.reset();
+			}
+		});
+		this.add(reset);
 		this.add(play);
+		this.setLayout(new GridLayout(2,1));
 	}
 
 	@Override

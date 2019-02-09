@@ -4,7 +4,6 @@ import java.awt.Color;
 import java.util.Observable;
 import java.util.Observer;
 
-import javax.swing.SwingUtilities;
 import javax.swing.SwingWorker;
 
 public class Modele extends Observable {
@@ -14,6 +13,19 @@ public class Modele extends Observable {
 	public Modele(int x, int y) {
 		methode = new Methode2(x, y);
 		play = false;
+	}
+	
+	public void setMethod() {
+		if (methode.getName().equals("Méthode Matyka")) {
+			methode = new Methode1(getX(), getY());
+		}else {
+			methode = new Methode2(getX(), getY());
+		}
+		reset();
+	}
+	
+	public String getMethodName() {
+		return methode.getName();
 	}
 	
 	public boolean getPlay() {

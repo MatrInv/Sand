@@ -96,5 +96,11 @@ public class MethodeAmelioree extends Methode {
 			}
 		}
 	}
+
+	@Override
+	public String getName() {
+		// TODO Auto-generated method stub
+		return "Methode custom";
+	}
 	
 }

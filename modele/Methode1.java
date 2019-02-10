@@ -23,31 +23,28 @@ public class Methode1 extends Methode {
 	}
 
 	public int nextState(int x, int y) {
-		double X = Math.random();
+		//double X = Math.random();
+		
 		if (getState(x, y) == 2) {
 			return 2;
-		}
-
-		if (getState(x, y + 1) == 2) {
-			return 1;
 		}
 
 		if (getState(x, y) == 0) {
 			if (getState(x, y - 1) == 1) { // grain en haut
 				return 1;
-			} else if (X < 0.5 && (getState(x - 1, y - 1) == 1 && getState(x - 1, y) != 0)) { // grains à gauche
-				return 1;
-			} else if (X >= 0.5 && (getState(x + 1, y - 1) == 1 && getState(x + 1, y) != 0)) { // grains à droite
-				return 1;
+			} else if ( getState(x - 1, y - 1) == 1 && getState(x - 1, y) == 1 && getState(x, y-1) == 0) { // grains ï¿½ gauche
+				//if (X < 0.5)
+					return 1;
+			} else if ( getState(x + 1, y - 1) == 1 && getState(x + 1, y) == 1 && getState(x, y-1) == 0) { // grains ï¿½ droite
+				//if (X >= 0.5)
+					return 1;
 			}
-		} else {
+		} else if (getState(x, y) == 1) {
 			if (getState(x, y + 1) == 0) { // grain en haut
 				return 0;
-			} else if (getState(x, y + 1) != 0 && getState(x - 1, y + 1) == 0 && getState(x - 1, y) == 0) { // grains à
-																											// gauche
+			} else if (getState(x, y + 1) == 1/**/ && getState(x - 1, y + 1) == 0 && getState(x - 1, y) == 0) { // grains ï¿½																						// gauche
 				return 0;
-			} else if (getState(x, y + 1) != 0 && getState(x + 1, y + 1) == 0 && getState(x + 1, y) == 0) { // grains à
-																											// droite
+			} else if (getState(x, y + 1) == 1/**/ && getState(x + 1, y + 1) == 0 && getState(x + 1, y) == 0) { // grains ï¿½																									// droite
 				return 0;
 			}
 		}
@@ -56,7 +53,7 @@ public class Methode1 extends Methode {
 
 	@Override
 	public String getName() {
-		return "Notre méthode";
+		return "Notre mï¿½thode";
 	}
 
 }

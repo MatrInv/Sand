@@ -51,7 +51,7 @@ public class Boutons extends JPanel implements Observer{
 			}
 		});
 		
-		method = new JButton("Change Method");
+		method = new JButton("Change Model");
 		method.addActionListener(new ActionListener() {
 			
 			@Override

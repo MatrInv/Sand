@@ -123,7 +123,7 @@ public class Methode2 extends Methode{
 
 	@Override
 	public String getName() {
-		return "Méthode Matyka";
+		return "Matyka's model";
 	}
 	
 	

@@ -9,7 +9,7 @@ import vues.Grille;
 public class Main extends JFrame{
 	
 	public Main() {
-		super("Sable");
+		super("FLIS");
 		this.setSize(600,500);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		

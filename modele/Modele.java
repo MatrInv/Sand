@@ -16,7 +16,7 @@ public class Modele extends Observable {
 	}
 	
 	public void setMethod() {
-		if (methode.getName().equals("M�thode Matyka")) {
+		if (methode.getName().equals("Matyka's model")) {
 			methode = new Methode1(getX(), getY());
 		}else {
 			methode = new Methode2(getX(), getY());

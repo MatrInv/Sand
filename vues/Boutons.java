@@ -1,20 +1,15 @@
 package vues;
 
-import java.awt.Color;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Observable;
 import java.util.Observer;
 
-import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import modele.Methode1;
 import modele.Modele;
 
 public class Boutons extends JPanel implements Observer{
@@ -25,7 +20,7 @@ public class Boutons extends JPanel implements Observer{
 	private JButton method;
 	private JLabel methodName;
 
-	public Boutons(Modele mod) {
+	public Boutons(final Modele mod) {
 		super();
 		
 		m = mod;

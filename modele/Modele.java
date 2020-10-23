@@ -2,8 +2,6 @@ package modele;
 
 import java.awt.Color;
 import java.util.Observable;
-import java.util.Observer;
-
 import javax.swing.SwingWorker;
 
 public class Modele extends Observable {
@@ -57,22 +55,10 @@ public class Modele extends Observable {
 		    sw.execute();
 	}
 
-	public Color ajoutGrain(int x, int y, int type) {
+	public void ajoutGrain(int x, int y, int type) {
 		
-		if(x == getX()-1 || y == getY()-1 || x ==0 || y == 0) {
-			setState(x, y, 2);
-			return Color.black;
-		}
-		
-		if (type == 0) {
-			methode.setState(x, y, 0);
-			return Color.white;
-		} else if (type == 1) {
-			methode.setState(x, y, 1);
-			return Color.yellow;
-		} else {
-			methode.setState(x, y, 2);
-			return Color.black;
+		if (!(x == getX()-1 || y == getY()-1 || x ==0 || y == 0)) {
+			methode.setState(x, y, type);
 		}
 		
 	}

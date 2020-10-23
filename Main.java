@@ -26,7 +26,7 @@ public class Main extends JFrame{
 	}
 
 	public static void main(String[] args) {
-		Main m = new Main();
+		new Main();
 	}
 
 }

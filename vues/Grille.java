@@ -4,12 +4,8 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.awt.GridLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.awt.event.MouseMotionListener;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -27,7 +23,7 @@ public class Grille extends JPanel implements Observer {
 
 	private GridBagConstraints grid;
 
-	private Color couleurs[] = { Color.WHITE, Color.yellow, Color.BLACK };
+	private Color couleurs[] = { OurColor.background, OurColor.sand, OurColor.walls };
 
 	private boolean pressed;
 
@@ -46,11 +42,11 @@ public class Grille extends JPanel implements Observer {
 		m = mod;
 		m.addObserver(this);
 
-		this.setBorder(BorderFactory.createLineBorder(Color.BLACK, 12));
+		this.setBorder(BorderFactory.createLineBorder(OurColor.walls, 12));
 
 		grille = new JButton[m.getX()][m.getY()];
 
-		this.setBackground(Color.WHITE);
+		this.setBackground(OurColor.background);
 		this.setLayout(new GridBagLayout());
 		grid = new GridBagConstraints();
 
@@ -66,10 +62,10 @@ public class Grille extends JPanel implements Observer {
 				grid.gridy = y;
 				JButton c = new JButton();
 				if (y >= m.getY() - 1 || y == 0 || x == 0 || x >= m.getX() - 1) {
-					c.setBackground(Color.black);
+					c.setBackground(OurColor.walls);
 					m.setState(x, y, 2);
 				} else {
-					c.setBackground(Color.WHITE);
+					c.setBackground(OurColor.background);
 				}
 				c.setPreferredSize(new Dimension(5, 5));
 				c.setBorderPainted(false);
@@ -104,17 +100,20 @@ public class Grille extends JPanel implements Observer {
 					}
 
 					public void actionButton(MouseEvent e) {
+						int clicType;
 						for (int x = 0; x < m.getX(); x++) {
 							for (int y = 0; y < m.getY(); y++) {
 								if ((JButton) e.getSource() == grille[x][y]) {
-									Color color = m.ajoutGrain(x, y, detectClic(e));
+									clicType = detectClic(e);
+									m.ajoutGrain(x, y, clicType);
 									JButton b = (JButton) e.getSource();
-									b.setBackground(color);
+									b.setBackground(OurColor.get(clicType));
 								}
 							}
 						}
 					}
 
+					//Mapping between elements types and mouse events
 					public int detectClic(MouseEvent e) {
 
 						if (buttonDown == MouseEvent.BUTTON1) { // bouton gauche

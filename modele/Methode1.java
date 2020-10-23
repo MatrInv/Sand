@@ -1,7 +1,5 @@
 package modele;
 
-import javax.swing.JButton;
-
 public class Methode1 extends Methode {
 	
 	public Methode1(int x, int y) {
